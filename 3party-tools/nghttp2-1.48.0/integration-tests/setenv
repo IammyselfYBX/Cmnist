@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+libdir="/home/tony/Pratice/Python/Pytorch/MNIST/3party-tools/nghttp2-1.48.0/lib"
+if [ -d "$libdir/.libs" ]; then
+    libdir="$libdir/.libs"
+fi
+
+export CGO_CFLAGS="-I/home/tony/Pratice/Python/Pytorch/MNIST/3party-tools/nghttp2-1.48.0/lib/includes -I/home/tony/Pratice/Python/Pytorch/MNIST/3party-tools/nghttp2-1.48.0/lib/includes -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /home/tony/.application/Miniconda/envs/mypytorch/include -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /home/tony/.application/Miniconda/envs/mypytorch/include"
+export CGO_CPPFLAGS="-DNDEBUG -D_FORTIFY_SOURCE=2 -O2 -isystem /home/tony/.application/Miniconda/envs/mypytorch/include -DNDEBUG -D_FORTIFY_SOURCE=2 -O2 -isystem /home/tony/.application/Miniconda/envs/mypytorch/include"
+export CGO_LDFLAGS="-L$libdir -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections -Wl,--allow-shlib-undefined -Wl,-rpath,/home/tony/.application/Miniconda/envs/mypytorch/lib -Wl,-rpath-link,/home/tony/.application/Miniconda/envs/mypytorch/lib -L/home/tony/.application/Miniconda/envs/mypytorch/lib -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections -Wl,--allow-shlib-undefined -Wl,-rpath,/home/tony/.application/Miniconda/envs/mypytorch/lib -Wl,-rpath-link,/home/tony/.application/Miniconda/envs/mypytorch/lib -L/home/tony/.application/Miniconda/envs/mypytorch/lib"
+export LD_LIBRARY_PATH="$libdir"
+export GODEBUG=cgocheck=0
+"$@"
